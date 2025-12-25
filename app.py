@@ -162,7 +162,7 @@ elif page == "AI Lead Intelligence":
     idx = st.selectbox(
         "Select Lead",
         df.index,
-        format_func=lambda i: f"Lead {df.at[i,'lead_id']} - {df.at[i,'company']}"
+        format_func=lambda i: f"Lead {df.at[i,'company']}"
     )
 
     lead = df.loc[idx]
@@ -235,7 +235,7 @@ elif page == "Assistant":
     idx = st.selectbox(
         "Select Lead",
         df.index,
-        format_func=lambda i: f"Lead {df.at[i,'lead_id']} — {df.at[i,'company']}"
+        format_func=lambda i: f"Lead — {df.at[i,'company']}"
     )
 
     lead = df.loc[idx]
@@ -263,6 +263,7 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
 
