@@ -203,7 +203,7 @@ elif page == "AI Lead Intelligence":
         st.error(f"{prediction} ({score}%)")
 
     st.markdown("---")
-    st.write(f"Quotation No:**{lead['quotation no.']}")
+    st.write(f"Quotation No:{lead['quotation no.']}")
     st.write(f"**Company:** {lead['company']}")
     st.write(f"**Description:** {lead['description']}")
     st.write(f"**Days Since Quotation:** {days}")
@@ -263,6 +263,7 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
 
