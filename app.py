@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import gspread
@@ -56,7 +55,6 @@ if st.sidebar.button("🔄 Refresh Data (after sheet update)"):
 
 # LOAD GOOGLE SHEET
 
-# LOAD GOOGLE SHEET
 def load_sheet():
     credentials = st.secrets["gcp_service_account"]
     gc = gspread.service_account_from_dict(credentials)
@@ -159,10 +157,13 @@ elif page == "AI Lead Intelligence":
 
     st.header("AI Lead Intelligence")
 
+    # Use quotation no. and company for selection
+    df['display_label'] = df['company'].astype(str) + ' (' + df['quotation no.'].astype(str) + ')'
+    
     idx = st.selectbox(
         "Select Lead",
         df.index,
-        format_func=lambda i: f"Lead {df.at[i,'company']}"
+        format_func=lambda i: df.at[i, 'display_label']
     )
 
     lead = df.loc[idx]
@@ -203,7 +204,7 @@ elif page == "AI Lead Intelligence":
         st.error(f"{prediction} ({score}%)")
 
     st.markdown("---")
-    st.write(f"Quotation No:{lead['quotation no.']}")
+    st.write(f"**Quotation No:** {lead['quotation no.']}")
     st.write(f"**Company:** {lead['company']}")
     st.write(f"**Description:** {lead['description']}")
     st.write(f"**Days Since Quotation:** {days}")
@@ -232,10 +233,14 @@ elif page == "Assistant":
 
     st.header("Message Generator")
 
+    # Use quotation no. and company for selection
+    if 'display_label' not in df.columns:
+        df['display_label'] = df['company'].astype(str) + ' (' + df['quotation no.'].astype(str) + ')'
+    
     idx = st.selectbox(
         "Select Lead",
         df.index,
-        format_func=lambda i: f"Lead — {df.at[i,'company']}"
+        format_func=lambda i: df.at[i, 'display_label']
     )
 
     lead = df.loc[idx]
@@ -263,11 +268,3 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
-
-
-
-
-
-
-
-
