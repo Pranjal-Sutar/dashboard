@@ -131,7 +131,7 @@ if page == "Follow-Up Dashboard":
     st.metric("Total Follow-Ups Required", followups.shape[0])
 
     st.dataframe(followups[[
-        "lead_id", "company", "description", "date", "days_since"
+        "lead_id", "quotation no.", "company", "description", "date", "days_since"
     ]])
 
 
@@ -263,5 +263,6 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
