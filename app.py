@@ -88,7 +88,7 @@ today = pd.Timestamp.today()
 df["date"] = df["date"].apply(lambda d: d if pd.notna(d) and d <= today else today)
 
 df["days_since"] = (today - df["date"]).dt.days
-df["lead_id"] = range(1, len(df) + 1)
+
 
 df["machine_type"] = df["description"].apply(detect_machine_type)
 
@@ -131,7 +131,7 @@ if page == "Follow-Up Dashboard":
     st.metric("Total Follow-Ups Required", followups.shape[0])
 
     st.dataframe(followups[[
-        "lead_id", "quotation no.", "company", "description", "date", "days_since"
+         "quotation no.", "company", "description", "date", "days_since"
     ]])
 
 
@@ -263,6 +263,7 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
 
