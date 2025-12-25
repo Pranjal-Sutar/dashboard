@@ -115,7 +115,7 @@ if page == "Follow-Up Dashboard":
 
     st.header("📋 Pending Follow-Ups")
 
-    # FOLLOW-UP WINDOW: 20–30 days only
+    # FOLLOW-UP WINDOW: 20–45 days only
     followups = df[
         (
             df["outcome"].isna() |
@@ -263,6 +263,7 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
 
