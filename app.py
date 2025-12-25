@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import gspread
 import plotly.express as px
-import json
+
 
 # PAGE CONFIG
 
@@ -58,12 +58,12 @@ if st.sidebar.button("🔄 Refresh Data (after sheet update)"):
 
 # LOAD GOOGLE SHEET
 def load_sheet():
-    credentials = json.loads(st.secrets["gcp_service_account"])
+    credentials = st.secrets["gcp_service_account"]
     gc = gspread.service_account_from_dict(credentials)
     sh = gc.open("imp")
     ws = sh.sheet1
     return pd.DataFrame(ws.get_all_records())
-
+    
 df = load_sheet()
 
 
@@ -262,3 +262,4 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
