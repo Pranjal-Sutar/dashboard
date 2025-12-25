@@ -75,13 +75,13 @@ df = df.rename(columns={
     "COMPANY": "company",
     "DATES": "date",
     "DESCRIPTION": "description",
-    "PRICE": "price",
+    "QUOTATION NO.":"quotation no.",
     "OUTCOME": "outcome",
     "PLACE": "place",
     "INDUSTRY_TYPE": "industry"
 })
 
-df["price"] = pd.to_numeric(df["price"], errors="coerce").fillna(0)
+
 df["date"] = pd.to_datetime(df["date"], dayfirst=True, errors="coerce")
 
 today = pd.Timestamp.today()
@@ -203,11 +203,12 @@ elif page == "AI Lead Intelligence":
         st.error(f"{prediction} ({score}%)")
 
     st.markdown("---")
+    st.write(f"Quotation No:**{lead['quotation no.']}")
     st.write(f"**Company:** {lead['company']}")
     st.write(f"**Description:** {lead['description']}")
-    st.write(f"**Price:** {lead['price']}")
-    st.write(f"**Outcome:** {lead['outcome'] if pd.notna(lead['outcome']) else 'No Response'}")
     st.write(f"**Days Since Quotation:** {days}")
+    st.write(f"**Outcome:** {lead['outcome'] if pd.notna(lead['outcome']) else 'No Response'}")
+    
 
 
 # CUSTOMER CLUSTERING
@@ -262,4 +263,5 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
