@@ -125,7 +125,7 @@ if page == "Follow-Up Dashboard":
         &
         (df["days_since"] > 20)
         &
-        (df["days_since"] <= 30)
+        (df["days_since"] <= 45)
     ]
 
     st.metric("Total Follow-Ups Required", followups.shape[0])
@@ -183,11 +183,11 @@ elif page == "AI Lead Intelligence":
             score = 55
             color = "info"
         elif days <= 35:
-            prediction = "Low chance — follow-up recommended."
+            prediction = "Low chance - follow-up recommended."
             score = 40
             color = "warning"
         else:
-            prediction = "Very low chance — customer likely inactive."
+            prediction = "Very low chance - customer likely inactive."
             score = 25
             color = "error"
 
@@ -263,6 +263,7 @@ elif page == "Assistant":
 else:
     st.header("Live Dataset")
     st.dataframe(df)
+
 
 
 
